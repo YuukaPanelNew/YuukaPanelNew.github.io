@@ -4,37 +4,45 @@ on:
   push:
     branches:
       - main
-
+      
 jobs:
-  build:
-    runs-on: ubuntu-18.04
+  build-and-deploy:
+    runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
 
     steps:
-      - name: Checkout source
+      # 获取博客源码和主题
+      - name: Checkout
         uses: actions/checkout@v2
         with:
-          ref: master
-
-      - name: Setup Node.js
+            submodules: 'true'
+      # 这里用的是 Node.js 13.x，14.x 生成 Hexo 静态页面会有问题
+      - name: Set up Node.js
         uses: actions/setup-node@v1
         with:
           node-version: '20'
 
-      - name: Setup Hexo
-        env:
-          ACTION_DEPLOY_KEY: ${{ secrets.SSH }}
+      # 安装依赖
+      - name: Install Dependencies
         run: |
-          mkdir -p ~/.ssh/
-          echo "$ACTION_DEPLOY_KEY" > ~/.ssh/id_rsa
-          chmod 700 ~/.ssh
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-          git config --global user.email "xiaolongqq1y@163.com"
-          git config --global user.name "ExquisiteCore"
-          npm install hexo-cli -g
           npm install
 
+      # 从之前设置的 secret 获取部署私钥
+      - name: Setup SSH Keys and known_hosts
+        env:
+          HEXO_DEPLOY_PRI: ${{ secrets.SSH }} 
+        run: |
+           mkdir -p ~/.ssh/
+            echo "$ACTION_DEPLOY_KEY" > ~/.ssh/id_rsa
+            chmod 700 ~/.ssh
+            chmod 600 ~/.ssh/id_rsa
+            ssh-keyscan github.com >> ~/.ssh/known_hosts
+            git config --global user.email "xiaolongqq1y@163.com"
+            git config --global user.name "ExquisiteCore"
+            npm install hexo-cli -g
+            npm install
+
+      # 生成并部署 `npx hexo clean && npx hexo g -d` or `npm run deploy`
       - name: Deploy
         run: |
           hexo clean
