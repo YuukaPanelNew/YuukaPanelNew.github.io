@@ -1,0 +1,10 @@
+
+name: yuukapanel
+tags: 幽香面板
+search:
+  filter: /wiki/yuukapanel/
+  placeholder: 在 yuukapanel 中搜索...
+icon: https://ooo.0x0.ooo/2024/02/08/OvlWAb.jpg
+leftbar: 
+  - related
+base_dir: /wiki/yuukapanel/

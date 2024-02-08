@@ -32,26 +32,55 @@ logo:
 menubar:
   columns: 4 # 一行多少个
   items: # 可按照自己需求增加，符合以下格式即可
-    - id: more
-      theme: ''
-      title: 首页
+    - id: post
+      theme: '#1BCDFC'
+      title: 博客
       icon: ''
       url: /
-
+      
     - id: wiki
-      theme: ''
-      title: 文档
+      theme: '#3DC550'
       icon: ''
+      title: 文档
       url: /wiki/
 
-    - id: friends
+    - id: more
       theme: ''
       title: 友链
       icon: ''
-      url: /friends/
+      url: /about/
 
-    - id: about
+    - id: more
       theme: ''
       title: 关于
       icon: ''
       url: /about/
+
+# 文章搜索
+search:
+  service: local_search # local_search, todo...
+  local_search: # 在 front-matter 中设置 indexing:false 来避免被搜索索引
+    field: all # post, page, all
+    path: /search.json # 搜索文件存放位置
+    content: true # 是否搜索内容
+    codeblock: true # 是否搜索代码块（需要content: true)
+
+comments:
+  service: giscus
+  # giscus
+  # https://giscus.app/zh-CN
+  giscus:
+    src: https://giscus.app/client.js
+    data-repo: YuukaPanelNew/YuukaPanelNew.github.io # [在此输入仓库]
+    data-repo-id: R_kgDOLLhJdw # [在此输入仓库 ID]
+    data-category: General # [在此输入分类名]
+    data-category-id: DIC_kwDOLLhJd84CdDnS
+    data-mapping: pathname
+    data-strict: 0
+    data-reactions-enabled: 1
+    data-emit-metadata: 0
+    data-input-position: top # top, bottom
+    data-theme: preferred_color_scheme
+    data-lang: zh-CN
+    data-loading: lazy
+    crossorigin: anonymous
