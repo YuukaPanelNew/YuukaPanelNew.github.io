@@ -4,11 +4,10 @@ on:
   push:
     branches:
       - main
-      
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    if: github.event.repository.owner.id == github.event.sender.id
 
     steps:
       # 获取博客源码和主题
