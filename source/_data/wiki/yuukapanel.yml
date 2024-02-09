@@ -1,10 +1,18 @@
-
 name: yuukapanel
 tags: 幽香面板
+description: 幽香面板是一个小巧精致的开服面板
 search:
   filter: /wiki/yuukapanel/
   placeholder: 在 yuukapanel 中搜索...
 icon: https://ooo.0x0.ooo/2024/02/08/OvlWAb.jpg
 leftbar: 
+  - toc
   - related
+comment_title: '评论区仅供交流，有问题请提加 [QQ群](https://qm.qq.com/q/94pScpPpRu) 反馈。'
 base_dir: /wiki/yuukapanel/
+toc:
+  '快速开始':
+    - index
+  '建立服务器':
+    - createBDS
+    - createPalworld
